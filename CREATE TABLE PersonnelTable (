@@ -1,0 +1,79 @@
+CREATE TABLE PersonnelTable (
+    PersonnelID int NOT NULL AUTO_INCREMENT,
+    PersonnelTypeID int,
+    Name varchar(255),
+    StatusID int,
+    DateOfCreation DateTime DEFAULT now(),
+    DateOfModification DateTime DEFAULT now(),
+    PRIMARY KEY (PersonnelID)
+);
+
+CREATE TABLE PatientTable (
+    PatientID int NOT NULL AUTO_INCREMENT,
+    Name varchar(255),
+    Address varchar(255),
+    Phone int,
+    DoctorID int,
+    StatusID int,
+    DateOfCreation DateTime DEFAULT now(),
+    DateOfModification DateTime DEFAULT now(),
+    PRIMARY KEY (PatientID)
+);
+
+CREATE TABLE PrescriptionTable (
+    PrescriptionID int NOT NULL AUTO_INCREMENT,
+    Type varchar(255),
+    PatientID int,
+    PersonnelID int,
+    Quantity int,
+    Dosage float,
+    StatusID int,
+    DateOfCreation DateTime DEFAULT now(),
+    DateOfModification DateTime DEFAULT now(),
+    PRIMARY KEY (PrescriptionID)
+);
+
+CREATE TABLE AppointmentTable (
+    AppointmentID int NOT NULL AUTO_INCREMENT,
+    Type varchar(255),
+    PersonnelID int,
+    PatientID int,
+    StatusID int,
+    DateOfCreation DateTime DEFAULT now(),
+    DateOfModification DateTime DEFAULT now(),
+    PRIMARY KEY (AppointmentID)
+);
+
+CREATE TABLE StatusTable (
+    StatusID int NOT NULL AUTO_INCREMENT,
+    StatusName varchar(255),
+    DateOfCreation DateTime DEFAULT now(),
+    DateOfModification DateTime DEFAULT now(),
+    PRIMARY KEY (StatusID)
+);
+
+CREATE TABLE PersonnelTypeTable (
+    PersonnelTypeID int NOT NULL AUTO_INCREMENT,
+    PersonnelTypeName varchar(255),
+    DateOfCreation DateTime DEFAULT now(),
+    DateOfModification DateTime DEFAULT now(),
+    PRIMARY KEY (PersonnelTypeID)
+);
+
+
+
+drop table PatientTable; drop table PersonnelTable; drop table PrescriptionTable; drop table AppointmentTable; drop table StatusTable;
+
+INSERT INTO StatusTable (StatusName) VALUES ('Active');
+INSERT INTO StatusTable (StatusName) VALUES ('Inactive');
+INSERT INTO StatusTable (StatusName) VALUES ('Deleted');
+
+UPDATE StatusTable
+SET StatusName = "NotActive";
+
+INSERT INTO AppointmentTable (Type, AppointmentDate, AppointmentTime, PersonnelID, PatientID, StatusID) 
+VALUES ("Type", "2020-05-05", "22-05-06", 1, 2, 1);
+
+INSERT INTO PersonnelTypeTable (PersonnelTypeName) VALUES ('Doctor');
+INSERT INTO PersonnelTypeTable (PersonnelTypeName) VALUES ('Nurse');
+INSERT INTO PersonnelTypeTable (PersonnelTypeName) VALUES ('Receptionist');
